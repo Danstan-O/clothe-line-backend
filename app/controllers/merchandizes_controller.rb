@@ -8,7 +8,11 @@ class MerchandizesController < ApplicationController
 
     def show
         merchandize = Merchandize.find(params[:id])
+        if merchandize
         render json: merchandize, except: [:created_at, :updated_at], include: :reviews
+        else
+            render json: {error: "Merchandize not found"}
+        end            
     end
 
     def create
